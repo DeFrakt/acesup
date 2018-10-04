@@ -1,7 +1,9 @@
 package com.stevenyaussi.acesup.controllers;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -76,19 +78,25 @@ public class AcesApi {
 				return response;
 			}
 		}
-		//set display list
-		List<Card> newPiles = new ArrayList<>();
+		//set display list, count, array holder
+		List<Card> newPileCard = new ArrayList<>();
+		HashMap<Integer, List<Card>> total = new HashMap<>();
+		//count deck
+		Integer deckSize = deckID.getDeck().size();
+		Integer deckDeal = deckSize / 4;
 		//Deal Card to Pile 1-4
 		cp1.addToPile(deckID.deal());
 		cp2.addToPile(deckID.deal());
 		cp3.addToPile(deckID.deal());
 		cp4.addToPile(deckID.deal());
 		//add to pile array
-		newPiles.add(cp1.getLastCard());
-		newPiles.add(cp2.getLastCard());
-		newPiles.add(cp3.getLastCard());
-		newPiles.add(cp4.getLastCard());
-		//reset current pile
+		newPileCard.add(cp1.getLastCard());
+		newPileCard.add(cp2.getLastCard());
+		newPileCard.add(cp3.getLastCard());
+		newPileCard.add(cp4.getLastCard());
+		//has map array
+		total.put(deckDeal, newPileCard);
+		//reset current pile;=
 		session.setAttribute("currentP1", cp1);
 		session.setAttribute("currentP2", cp2);
 		session.setAttribute("currentP3", cp3);
@@ -99,7 +107,7 @@ public class AcesApi {
 		System.out.println("CP3: "+ cp3.getPile());
 		System.out.println("CP4: "+ cp4.getPile());
 		//convert to JSON 
-		String response = new Gson().toJson(newPiles);
+		String response = new Gson().toJson(total);
 		return response;
 	}
 	@GetMapping("/discard")

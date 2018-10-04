@@ -37,10 +37,8 @@ public class AcesController {
     
     public AcesController(AcesService acesService, UserValidator userValidator) {
         this.acesService = acesService;
-        this.userValidator = userValidator;
-        
+        this.userValidator = userValidator;    
     }
-    
     
 	@RequestMapping("/")
     public String login(@ModelAttribute("user") User user) {
@@ -129,7 +127,6 @@ public class AcesController {
         	CardPile cp1 = new CardPile();
         	//set cp1
         	session.setAttribute("currentP1", cp1);
-        	
         }
         //check CardPile 2 exists
         CardPile cp2_start = (CardPile) session.getAttribute("currentP2");
@@ -166,7 +163,6 @@ public class AcesController {
         	//set cp4
         	session.setAttribute("score", scoreInt);
         }
-	        
         return "homePage.jsp";
     }
     
