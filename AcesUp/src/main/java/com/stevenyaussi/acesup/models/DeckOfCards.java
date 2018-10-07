@@ -33,7 +33,7 @@ public class DeckOfCards {
 //		BufferedImage bigImage = ImageIO.read(new File("./src/main/resources/static/images/cardDeck.jpg"));
 //		BufferedImage tempCardImage;
 		
-		//loop suit
+//		loop suit
 		for(int suit = 0; suit < 4; suit++) {
 		//loop faces
 			for(int face = 0; face < 13; face++) {
@@ -43,7 +43,7 @@ public class DeckOfCards {
 //				new ImageIcon(c.getCardImage());
 			}
 		}
-//		//win test
+		//win test
 //		Card c1 = new Card("Hearts","Ace", 14);
 //		Card c2 = new Card("Diamonds","Ace", 14);
 //		Card c3 = new Card("Clubs","Ace", 14);

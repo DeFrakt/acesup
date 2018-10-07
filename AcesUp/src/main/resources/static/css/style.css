@@ -5,11 +5,11 @@ body{
 	background-color:#3055a6;
 }
 img{
-	position: absolute; 
+	position: relative; 
     padding: 0;
     bottom: 0;
     vertical-align: bottom;
-}
+} 
 .card{
 	margin:-138px -0 0 13px;
     position: absolute; 
@@ -26,7 +26,6 @@ img{
     display: inline-block;
     *display: inline;
     zoom: 1;
-    border: solid black 2px;
     postion: relative;
 }	
 #left{
@@ -42,7 +41,7 @@ img{
     float: none;
     overflow: hidden;
     padding-top: 15px; 
-    padding-left: 25px;
+    padding-left: 27px;
     padding-right: 25px;
 }
 #right{
@@ -73,6 +72,7 @@ img{
 }
 .result{
 	display: inline-block;
+	padding: 0 168px;
 }	
 #center > .container > .menu-item{
 	height:20px;
@@ -88,4 +88,15 @@ img{
 #piles_total{
 	color:#309bd6;
 }
-
+#lose{
+	border: 4px black solid;
+}
+.btn{
+	margin: 31px 0 0 96px ;
+}
+#win{
+	margin: 0 0 0 50px;
+}
+#win_title{ 
+	margin: 0 0 0 58px;
+}

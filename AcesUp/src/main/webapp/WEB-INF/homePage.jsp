@@ -18,7 +18,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  <a class="navbar-brand" href="#"><h4>Aces's Up</h4></a>
+	  <a class="navbar-brand" href="#"><h4>Idiot's Delight</h4></a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
@@ -27,11 +27,14 @@
 	      <li class="nav-item active">
 	        <a class="nav-link" href="#">Game <span class="sr-only">(current)</span></a>
 	      </li>
-	      <li class="nav-item">
+	 <!--      <li class="nav-item">
 	        <a class="nav-link" href="#">Stats</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="#">Preferences</a>
+	      </li> -->
+	      <li class="nav-item">
+	        <a class="nav-link" href="/reset">Reset Game</a>
 	      </li>
 	    </ul>
 	    <span class="navbar-text">

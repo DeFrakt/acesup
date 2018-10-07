@@ -58,28 +58,27 @@
 		    
 	 		if(typeof p1LastCard == "undefined"){
 				var cardDrop1 = "1";
-				$("#"+cardDrop1).droppable().droppable( "option", "disabled", false );
+				$("#drop"+cardDrop1).droppable().droppable( "option", "disabled", false );
 			}
 			if(typeof p2LastCard == "undefined"){
 				var cardDrop2 = "2";
-				$("#"+cardDrop2).droppable().droppable( "option", "disabled", false );
+				$("#drop"+cardDrop2).droppable().droppable( "option", "disabled", false );
 			}
 			if(typeof p3LastCard == "undefined"){
 				var cardDrop3 = "3";
-				$("#"+cardDrop3).droppable().droppable( "option", "disabled", false );
+				$("#drop"+cardDrop3).droppable().droppable( "option", "disabled", false );
 			}
 			if(typeof p4LastCard == "undefined"){
 				var cardDrop4 = "4";
-				$("#"+cardDrop4).droppable().droppable( "option", "disabled", false );
+				$("#drop"+cardDrop4).droppable().droppable( "option", "disabled", false );
 			} 
 			
-		    $("#"+cardDrop1+",#"+cardDrop2+",#"+cardDrop3+",#"+cardDrop4).droppable({
+		    $("#drop"+cardDrop1+",#drop"+cardDrop2+",#drop"+cardDrop3+",#drop"+cardDrop4).droppable({
 		        drop: function (event, ui) {
-		        console.log(event);
 		        var offset = $('.pile').offset();
 		        var top = parseInt($(ui.draggable).css('top')) - offset.top;
 		        var left = parseInt($(ui.draggable).css('left')) - offset.left;            
-		        $(ui.draggable).appendTo(event.target);
+		        $(ui.draggable).appendTo("#"+event.target.id.slice(4, 5));
 		        $(ui.draggable).css({'top' : top, 'left' : left});
 		        $(this).droppable( "option", "disabled", true );	
 		          
@@ -91,8 +90,8 @@
 		            	//Card var
 						var currentCard = $(this).attr('id');
 		             	var card = currentCard.split("_");
-		             	$(this).attr('id', card[0]+'_'+card[1]+'_'+event.target.id);
-		             	var data = "emptyPile="+event.target.id+"&movingFromPile="+card[2];
+		             	$(this).attr('id', card[0]+'_'+card[1]+'_'+event.target.id.slice(4, 5));
+		             	var data = "emptyPile="+event.target.id.slice(4, 5)+"&movingFromPile="+card[2];
 		        	    $.ajax({
 		                    url : '/api/move',
 		                    data : data,  
@@ -125,14 +124,16 @@
                 if(data == true){
                 	$(".container").remove();
                 	$(".deal").remove();
-                	$(".result").append("You win, idiot!<BR>");
-                	$(".result").append("<input type='submit' value='Play Again?' id='reset'>");
+                	$(".result").append("<h3 id='win_title'>You win, idiot!</h3><BR>");
+                	$(".result").append("<input type='image' type='button' img src='/images/dunce.jpg' width='200' id='win'><BR>");
+                	$(".result").append("<input type='submit' value='Play Again?' id='reset' class='btn btn-primary'>");
                 	$("#totalPiles").html(0);
                 } else if(data == false){
                 	$(".container").remove();
                 	$(".deal").remove();
-                	$(".result").append("Losing is hard, try again.<BR>");
-                	$(".result").append("<input type='submit' value='Play Again?' id='reset'>");
+                	$(".result").append("<h3>Losing is hard, try again.</h3><BR>");
+                	$(".result").append("<input type='image' type='button' img src='/images/lose.png' id='lose'><BR>");
+                	$(".result").append("<input type='submit' value='Play Again?' id='reset' class='btn btn-primary'>");
                 	$("#totalPiles").html(0);
                 } else {
              		$.each(data, function(k, v){
@@ -160,11 +161,6 @@
 			var p2LastCard = $("#2 > .card").last().attr('id');
 			var p3LastCard = $("#3 > .card").last().attr('id');
 			var p4LastCard = $("#4 > .card").last().attr('id');
-			console.log("Current Card: "+currentCard);
-			console.log("P1Last: "+p1LastCard);
-			console.log("P2Last: "+p2LastCard);
-			console.log("P3Last: "+p3LastCard);
-			console.log("P4Last: "+p4LastCard);
 			if(currentCard.localeCompare(p1LastCard) === 0){
 				var data = "card="+currentCard;
 				console.log("Discard Card is Last1: "+data);
@@ -200,15 +196,9 @@
                 	var count2 = $("#2 > .card").length;
                 	var count3 = $("#3 > .card").length;
                 	var count4 = $("#4 > .card").length;
-                	console.log("===========");
-                	console.log("C1: "+count1);
-                	console.log("C2: "+count2);
-                	console.log("C3: "+count3);
-                	console.log("C4: "+count4);
                 	if(count1 == 0 || count2 == 0 || count3 == 0 || count4 == 0){       		
                 		$(moveCard); 
                 	}
-                	
                   },
                   error : function(xhr, status, error) {
                     alert(xhr.responseText);
