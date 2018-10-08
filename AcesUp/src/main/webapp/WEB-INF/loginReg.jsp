@@ -6,7 +6,7 @@
 <html lang="en">
 
 <head>
-  <title>Email Validation</title>
+  <title>Login</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,19 +15,38 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
   <style>
+    body {
+		background-color: #3586ce !important;
+	}
     b {
-      color: red;
+      	color: red;
+    }
+    h4 > b{
+    	color: #0a3d6b;
+    }
+    h2 {
+    	color: white;
     }
   </style>
+  <script>
+	//random title
+	  function random_title(){
+	  	var title = ["Ace's Up", "Idiot's Delight", "Once in a Lifetime", "Ace of the Pile", "Rocket to the Top", "Firing Squad", "Loser Solitaire", "Aces High", "Drivel", "Leggen"];
+	  	var number = Math.floor(Math.random() * 10);
+	  	console.log(number);
+	  	return title[number];
+	  }
+  </script>
 </head>
 
 <body>
   <div class="container">
-    <h2>Login and Registration</h2>
+    <h2>Registration and Login</h2>
+    <h4><b><script>document.write(random_title());</script></b></h4>
     <div class="container col-lg-12 " style="margin-top: 50px; background-color: rgb(226, 226, 226);">
       <div class="row">
         <div class="col col-lg-6 border 1px">
-          <h5>Register here!</h5>
+          <h5>Register</h5>
           <b><form:errors path="user.*"/></b>
           <b><c:out value="${errorReg}" /></b>
           <form:form method="POST" action="/registration" modelAttribute="user">
@@ -80,7 +99,7 @@
         <div>
           <div class="container">
             <div class="col col-lg-18 border 1px">
-              <h5>Login here!</h5>
+              <h5>Login</h5>
               <b><c:out value="${error}" /></b>
                <form method="post" action="/login">
                 <table class="table table-dark table-striped">

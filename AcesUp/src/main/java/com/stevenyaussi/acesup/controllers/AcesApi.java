@@ -83,7 +83,7 @@ public class AcesApi {
 		HashMap<Integer, List<Card>> total = new HashMap<>();
 		//count deck
 		Integer deckSize = deckID.getDeck().size();
-		Integer deckDeal = deckSize / 4;
+		Integer deckDeal = (deckSize / 4) - 1;
 		//Deal Card to Pile 1-4
 		cp1.addToPile(deckID.deal());
 		cp2.addToPile(deckID.deal());

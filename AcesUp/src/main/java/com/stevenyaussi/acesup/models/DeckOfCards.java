@@ -23,24 +23,13 @@ public class DeckOfCards {
 		String [] faces = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
 		//deck array
 		List<Card> deck = new ArrayList<>();
-		
-		//img coordinates
-//		final int width = 100;
-//		final int height = 100;
-//		final int col = 13;
-//		final int rows = 4;
-		//sub image
-//		BufferedImage bigImage = ImageIO.read(new File("./src/main/resources/static/images/cardDeck.jpg"));
-//		BufferedImage tempCardImage;
-		
+
 //		loop suit
 		for(int suit = 0; suit < 4; suit++) {
 		//loop faces
 			for(int face = 0; face < 13; face++) {
-//				tempCardImage = bigImage.getSubimage(((face*width)+(face*9)), ((suit*height) + (suit*14)), width, height);
 				Card c = new Card(suits[suit],faces[face], face+2);	
 				deck.add(c);
-//				new ImageIcon(c.getCardImage());
 			}
 		}
 		//win test
