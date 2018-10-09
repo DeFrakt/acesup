@@ -29,7 +29,7 @@ img{
     background-color: transparent;
 }	
 #left{
-	height: 742px;
+	height: 760px;
     background-color:#BCC6CC;
     float: left;
     width: 125x;
@@ -38,7 +38,7 @@ img{
     box-shadow:  10px black;
 }
 #center{
-	height: 742px;
+	height: 760px;
     background-color:#E5E4E2;	
     float: none;
     overflow: hidden;
@@ -46,10 +46,22 @@ img{
     padding-left: 26px;
     padding-right: 24px;
     border-radius: 25px 25px  0px 0px;
+   
+  
+}
+#center_rules{
+	height: 760px;
+    background-color:#E5E4E2;	
+    float: none;
+    overflow: hidden;
+    padding-top: 20px; 
+    padding-left: 26px;
+    padding-right: 24px;
+    border-radius: 25px 25px  0px 0px;
   
 }
 #right{
-	height: 742px;
+	height: 760px;
     background-color:#98AFC7;
     float: right;
     padding: 25px;
@@ -75,6 +87,11 @@ img{
 }
 .deal{
 	display:inline-block;
+}
+.reshuffle {
+	style: bold;
+	margin: -110px 0 0 24px;
+	font-weight: bold;
 }
 .result{
 	display: inline-block;

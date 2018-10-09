@@ -6,7 +6,7 @@
 <html lang="en">
 
 <head>
-  <title>Login</title>
+  <title>Idiot's Delight - Login & Registration</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,6 +14,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
+  <script src="/js/functions.js"></script>
   <style>
     body {
 		background-color: #3586ce !important;
@@ -27,21 +28,26 @@
     h2 {
     	color: white;
     }
+    #outer{
+    	padding: 20px;
+    	border-radius: 25px 0px  25px 0px;
+    	width: 980px;
+		height: 1024px;
+		margin: auto;
+    }
+    #inner{
+    	padding: 20px;
+    	border-radius: 25px 0px  25px 0px;
+    	width: 980px;
+		height: 500px;
+		margin: auto;
+    }
   </style>
-  <script>
-	//random title
-	  function random_title(){
-	  	var title = ["Ace's Up", "Idiot's Delight", "Once in a Lifetime", "Ace of the Pile", "Rocket to the Top", "Firing Squad", "Loser Solitaire", "Aces High", "Drivel", "Leggen"];
-	  	var number = Math.floor(Math.random() * 10);
-	  	console.log(number);
-	  	return title[number];
-	  }
-  </script>
 </head>
 
 <body>
-  <div class="container">
-    <h2>Registration and Login</h2>
+  <div id="outer">
+    <h2>Login & Registration</h2>
     <h4><b><script>document.write(random_title());</script></b></h4>
     <div class="container col-lg-12 " style="margin-top: 50px; background-color: rgb(226, 226, 226);">
       <div class="row">

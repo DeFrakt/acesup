@@ -11,24 +11,27 @@
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
  	<script src="/js/jquery-3.3.1.min.js"></script>
- 	<script src="/js/jquery-1.12.1-ui.min.js"></script>
 	<script src="/js/jquery.ui.touch-punch.min.js"></script>
-  	<script src="/js/ajax.js"></script>
+	<style>
+	#left > p{
+		font-weight: bold;
+	}
+	</style>
 </head>
 <body>
 	<div id="outer">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		  <a class="navbar-brand" href="#"><h4>Idiot's Delight</h4></a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
+		  <span class="navbar-toggler-icon"></span>
 		  </button>
 		  <div class="collapse navbar-collapse" id="navbarText">
 		    <ul class="navbar-nav mr-auto">
-		      <li class="nav-item active">
-		      <a class="nav-link" href="#">Game <span class="sr-only">(current)</span></a>
-		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="/rules">Rules</a>
+		        <a class="nav-link" href="/reset">Game</a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="/rules">Rules<span class="sr-only">(current)</span></a>
 		      </li>
 		 <!-- v2 preferences  
 		 		<li class="nav-item">
@@ -47,33 +50,37 @@
 		  </div>
 		</nav>
 		<div id="left">
-			<p><b><span id="score_title">Score:</span> <span id="score"><c:out value="${score}" /></span></b></p>	
-			<p><b><span id="piles_total">Deals:</span> <span id="totalPiles">13</span></b></p>
+			<P>1</P>
+			<P>2</P>
+			<BR>
+			<P>3</P>
+			<P>4</P>
+			<BR>
+			<P>5</P>
+			<BR>
+			<P>6</P>
+			<P>7</P>
+			<BR>
+			<P>8</P>
+
 		</div>
 		<div id="right">
 			<div class="deal"><input type="image" src="/images/card_blue_back.png" width="120" type="button" value="Deal" id="start" ></div>
+			<P>Push 'blue card' to <i>deal</i></P>
 		</div>
-		<div id="center">
-			<div class="container">
-				<div>
-					<div class="offsetPile" id="drop1"></div>
-			    	<div class="offsetPile" id="drop2"></div>
-			    	<div class="offsetPile" id="drop3"></div>
-			    	<div class="offsetPile" id="drop4"></div>
-			    </div>
-			    <div>
-				    <div class="pile" id="1"></div>
-				    <div class="pile" id="2"></div>
-				    <div class="pile" id="3"></div>
-				    <div class="pile" id="4"></div>
-				</div> 
-			</div>
-			<form action="/reset">
-				<div class="result"></div>
-			</form>
-		</div>
-	</div>	
+		<div id="center_rules">
+			<P>Deal four cards in a row face up.</P>
+			<P>If there are two or more cards of the same suit, discard all but the highest-ranked card of that suit. Aces rank high.</P>
+			<P>Repeat step 2 until there are no more pairs of cards with the same suit.</P>
+			<P>Whenever there are any empty spaces, you may choose the top card of another pile to be put into the empty space. After you do this, go to Step 2.</P>
+			<P>When there are no more cards to move or remove, deal out the next four cards from the deck face-up onto each pile.</P>
+			<P>Repeat Step 2, using only the visible, or top, cards on each of the four piles.</P>
+			<P>When the last four cards have been dealt out and any moves made, the game is over. The fewer cards left in the tableau, the better. To win is to have only the four aces left.</P>
+			<P>When the last four cards have been dealt out and any moves made, the game is over. The fewer cards left in the tableau, the better. To win is to have only the four aces left.
+			When the game ends, the number of discarded cards is your score. </P>
+		</div>	
     <!-- Bootstrap -->
     <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
+

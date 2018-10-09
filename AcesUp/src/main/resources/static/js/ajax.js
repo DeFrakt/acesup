@@ -123,7 +123,11 @@ $(document).ready(function(){
             	$("#totalPiles").html(0);
             } else {
          		$.each(data, function(k, v){
-         		$("#totalPiles").html(k);
+         			$("#totalPiles").html(k);
+         			if(k === "0"){
+         				$("#start").css({'opacity': 0.3});
+         				$(".deal").append("<div class='reshuffle'>Reshuffle</div>");
+         			}
          			$.each(v, function(k3, v3){
          				$( "#"+ count ).append('<img src="/images/'+v3["faceName"]+"_"+v3["suit"]+'.png" class="c" id='+v3["suit"]+"_"+v3["faceValue"]+"_"+count+'>');
          				count++;    			
@@ -188,7 +192,7 @@ $(document).ready(function(){
 
 //random title
 function random_title(){
-	var title = ["Ace's Up", "Idiot's Delight", "Once in a Lifetime", "Ace of the Pile", "Rocket to the Top", "Firing Squad", "Loser Solitaire", "Aces High", "Drivel", "Leggen"];
+	var title = ["Ace's Up", "Once in a Lifetime", "Ace of the Pile", "Rocket to the Top", "Firing Squad", "Loser Solitaire", "Aces High", "Drivel", "Leggen", "Idiot's Delight"];
 	var number = Math.floor(Math.random() * 10);
 	return title[number];
 }

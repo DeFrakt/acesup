@@ -68,7 +68,7 @@ public class AcesController {
         	model.addAttribute("error", "Email required");
         	return "loginReg.jsp";
         }
-        if( password.length() == 0 ) {
+        if(password.length() == 0 ) {
         	model.addAttribute("error", "Password required");
         	return "loginReg.jsp";
         }
@@ -165,106 +165,16 @@ public class AcesController {
         }
         return "homePage.jsp";
     }
-    
-//    @RequestMapping(value = "/discardCard", method = RequestMethod.GET)
-//    public @ResponseBody String processAJAXRequest(@RequestParam("pile") int pile, Model model, DeckOfCards d, CardPile cp1) {
-//   
-//    	cp1.addToPile(d.deal());
-//		model.addAttribute("cp1", cp1.getPile());
-//		System.out.println(cp1.getPile());
-//		System.out.println(pile);
-//    	
-//    	if(pile == 1) {
-//		
-//		} else if (pile == 2) {
-//			System.out.println(pile);
-//		} else if (pile == 3) {
-//			System.out.println(pile);
-//		} else if (pile == 4) {
-//			System.out.println(pile);
-//		} else {
-//			System.out.println("Invalid Param");
-//		}
-//        String response = "homePage";
-//        // Process the request
-//        return response;
-//        
-//    }
-//    
-
-    
-   
-//    @RequestMapping(value="/addCourse", method=RequestMethod.POST)
-//    public String createCourse(@Valid @ModelAttribute("course") Course course, BindingResult result, HttpSession session, Model model) {
-//    	if(result.hasErrors()) {
-//            return "addCourse.jsp";
-//        } else {
-//        	courseService.createCourse(course);
-//        	return "redirect:/courses";
-//        }
-//    } 
-//   
-//    //join course
-//    @RequestMapping("/courses/{id}")
-//    public String courseJoin(@PathVariable("id") Long id, Model model, HttpSession session) {
-//    	Long userID = (Long) session.getAttribute("userID");
-//        if(userID == null) {
-//        	return "redirect:/";
-//        }
-//    	Course c = courseService.findCourse(id);
-//    	model.addAttribute("course", c);
-//    	List<Attendee> a = courseService.findAllAttendees(id);
-//    	Long count = courseService.countAttendees(id);
-//    	model.addAttribute("attendee", a);
-//    	model.addAttribute("count", count);
-//        return "joinCourse.jsp";
-//    }
-//    
-//    //joining course
-//    @RequestMapping(value="/joinCourse/{id}", method=RequestMethod.GET)
-//    public String joiningCourse(@PathVariable("id") Long id, HttpSession session) {
-//    	Long userID = (Long) session.getAttribute("userID");
-//        User u = courseService.findUserById(userID);
-//        Course c = courseService.findCourse(id);
-//        courseService.joiningCourse(u, c);
-//        return "redirect:/courses/"+id;
-//        
-//    }
-//    
-//    //edit course
-//    @RequestMapping("/courses/{id}/edit")
-//    public String courseEdit(@PathVariable("id") Long id, Model model, HttpSession session) {
-//    	Long userID = (Long) session.getAttribute("userID");
-//        if(userID == null) {
-//        	return "redirect:/";
-//        }
-//    	Course c = courseService.findCourse(id);
-//    	model.addAttribute("course", c);
-//        return "editCourse.jsp";
-//    }
-//    
-//    @RequestMapping(value="/editCourse/{id}", method=RequestMethod.PUT)
-//    public String update(@Valid @ModelAttribute("course") Course course, BindingResult result, @PathVariable("id") Long id) {
-//        if (result.hasErrors()) {
-//            return "editCourse.jsp";
-//        } else {
-//            courseService.updateCourse(course, id);
-//            return "redirect:/courses";
-//        }
-//    }
-//    //delete
-//    @RequestMapping(value="/courses/{id}/delete", method=RequestMethod.GET)
-//    public String deleteCourse(@PathVariable("id") Long id, HttpSession session) {
-//        courseService.deleteCourse(id);
-//        return "redirect:/courses";
-//        
-//    }
-//    @RequestMapping(value="/removeFromCourse/{id}", method=RequestMethod.GET)
-//    public String removeUser(@PathVariable("id") Long id, HttpSession session) {
-//        courseService.removeUser(id);
-//        return "redirect:/courses";
-//        
-//    }
-    
-   
+    @RequestMapping("/rules")
+    public String rules(HttpSession session, Model model) {
+    	//Check if logged in
+        Long userID = (Long) session.getAttribute("userID");
+        if(userID == null) {
+        	return "redirect:/";
+        }
+      //find user
+        User u = acesService.findUserById(userID);
+        model.addAttribute("user", u);
+        return "rules.jsp";
+    }
 }
