@@ -60,24 +60,24 @@
 			<BR>
 			<P>6</P>
 			<P>7</P>
-			<BR>
-			<P>8</P>
-
 		</div>
 		<div id="right">
 			<div class="deal"><input type="image" src="/images/card_blue_back.png" width="120" type="button" value="Deal" id="start" ></div>
-			<P>Push 'blue card' to <i>deal</i></P>
+			<P>Push button, (blue card), to <b>deal</b></P>
 		</div>
 		<div id="center_rules">
-			<P>Deal four cards in a row face up.</P>
-			<P>If there are two or more cards of the same suit, discard all but the highest-ranked card of that suit. Aces rank high.</P>
+			<P><b>Deal</b> cards by pushing blue card deck.</P>
+			<P>If there are two or more cards of the same suit, <b>discard</b> all but the highest-ranked card of that suit. Aces rank high.</P>
 			<P>Repeat step 2 until there are no more pairs of cards with the same suit.</P>
-			<P>Whenever there are any empty spaces, you may choose the top card of another pile to be put into the empty space. After you do this, go to Step 2.</P>
-			<P>When there are no more cards to move or remove, deal out the next four cards from the deck face-up onto each pile.</P>
+			<P>Whenever there are any empty spaces, you may choose the top card of another pile to <b>move</b> to the empty space. After you do this, go to Step 2.</P>
+			<P>When there are no more cards to move or remove, <b>deal</b> out the next cards.</P>
 			<P>Repeat Step 2, using only the visible, or top, cards on each of the four piles.</P>
-			<P>When the last four cards have been dealt out and any moves made, the game is over. The fewer cards left in the tableau, the better. To win is to have only the four aces left.</P>
 			<P>When the last four cards have been dealt out and any moves made, the game is over. The fewer cards left in the tableau, the better. To win is to have only the four aces left.
 			When the game ends, the number of discarded cards is your score. </P>
+			<hr>
+			<P><B>Deal</B>: push blue card (top-right corner)</P>
+			<P><B>Discard</B>: push card you would like to remove</P>
+			<P><B>Move</B>: hold and drag to empty pile</P>
 		</div>	
     <!-- Bootstrap -->
     <script src="/js/bootstrap.min.js"></script>
