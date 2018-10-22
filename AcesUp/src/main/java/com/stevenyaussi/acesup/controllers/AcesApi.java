@@ -1,7 +1,7 @@
 package com.stevenyaussi.acesup.controllers;
 
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,27 +18,34 @@ import com.google.gson.Gson;
 import com.stevenyaussi.acesup.models.Card;
 import com.stevenyaussi.acesup.models.CardPile;
 import com.stevenyaussi.acesup.models.DeckOfCards;
+import com.stevenyaussi.acesup.models.Game;
+import com.stevenyaussi.acesup.models.User;
 import com.stevenyaussi.acesup.services.AcesService;
+import com.stevenyaussi.acesup.services.GameService;
 
 @RestController
 @RequestMapping("/api")
 public class AcesApi {
+	private final GameService gameService;
 	private final AcesService acesService;
 	
-	public AcesApi(AcesService acesService) {
-        this.acesService = acesService;
+	public AcesApi(GameService gameService, AcesService acesService) {
+		this.acesService = acesService;
+		this.gameService = gameService;
     }
 	//create pile
 	@GetMapping("/deal")
 	public String cardPile(HttpSession session) {
 		//get deck
 		DeckOfCards deckID = (DeckOfCards) session.getAttribute("deck");
+		//get score
+		Integer score = (Integer) session.getAttribute("score");
 		//get CardPiles 1-4
 		CardPile cp1 = (CardPile) session.getAttribute("currentP1");
 		CardPile cp2 = (CardPile) session.getAttribute("currentP2");
 		CardPile cp3 = (CardPile) session.getAttribute("currentP3");
 		CardPile cp4 = (CardPile) session.getAttribute("currentP4");
-		if (deckID.getDeck().size() == 0) {
+		if (deckID.getDeck().size() == 0 ) {
 			//set last piles list
 			List<Card> lastPiles = new ArrayList<>();
 			//add to last pile array
@@ -48,31 +55,37 @@ public class AcesApi {
 			lastPiles.add(cp4.getLastCard());
 			//loop and check aces
 			int count = 0;
-			for (Card card : lastPiles) {
-				System.out.println(card);
-				if(card.getCard().equals("Clubs_14")) {
-					count = count + 1;
-					System.out.println("You hit Clubs_14");
-				}
-				if(card.getCard().equals("Spades_14")) {
-					count = count + 1;
-					System.out.println("You hit Spades_14");
-				}
-				if(card.getCard().equals("Diamonds_14")) {
-					count = count + 1;
-					System.out.println("You hit Diamonds_14");
-				}
-				if(card.getCard().equals("Hearts_14")) {
-					count = count + 1;
-					System.out.println("You hit Hearts_14");
+			if(cp1.getPile().size() == 1 && cp2.getPile().size() == 1 && cp3.getPile().size() == 1 && cp4.getPile().size() == 1) {
+				for (Card card : lastPiles) {
+					if(card.getCard().equals("Clubs_14")) {
+						count = count + 1;
+						System.out.println("You hit Clubs_14");
+					}
+					if(card.getCard().equals("Spades_14")) {
+						count = count + 1;
+						System.out.println("You hit Spades_14");
+					}
+					if(card.getCard().equals("Diamonds_14")) {
+						count = count + 1;
+						System.out.println("You hit Diamonds_14");
+					}
+					if(card.getCard().equals("Hearts_14")) {
+						count = count + 1;
+						System.out.println("You hit Hearts_14");
+					}
 				}
 			}
+			//finder user
+			Long userID = (Long) session.getAttribute("userID");
+			User user = acesService.findUserById(userID);
 			//evaluate win
 			if(count == 4) {
+		        gameService.createOutcome(score, true, user);
 				Boolean outcome = true;
 				String response = new Gson().toJson(outcome);
 				return response;
 			} else {
+		        gameService.createOutcome(score, false, user);
 				Boolean outcome = false;
 				String response = new Gson().toJson(outcome);
 				return response;
@@ -146,7 +159,7 @@ public class AcesApi {
 	        		if(pile == 1) {
 		        			currentDiscard.addToPile(currentP1.removeFromPile());
 		        			session.setAttribute("currentP1", currentP1);
-		        			System.out.println("Remove: "+ currentP1.getPile());
+		        			System.out.println("Remove P1: "+ currentP1.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -157,7 +170,7 @@ public class AcesApi {
 	        		} else if(pile == 2) {
 		        			currentDiscard.addToPile(currentP2.removeFromPile());
 		        			session.setAttribute("currentP2", currentP2);
-		        			System.out.println("Remove: "+ currentP2.getPile());
+		        			System.out.println("Remove P2: "+ currentP2.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -168,7 +181,7 @@ public class AcesApi {
 	        		} else if(pile == 3) {
 		        			currentDiscard.addToPile(currentP3.removeFromPile());
 		        			session.setAttribute("currentP3", currentP3);
-		        			System.out.println("Remove: "+ currentP3.getPile());
+		        			System.out.println("Remove P3: "+ currentP3.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -179,7 +192,7 @@ public class AcesApi {
 	        		} else if(pile == 4) {
 	        			currentDiscard.addToPile(currentP4.removeFromPile());
 		        			session.setAttribute("currentP4", currentP4);
-		        			System.out.println("Remove: "+ currentP4.getPile());
+		        			System.out.println("Remove P4: "+ currentP4.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -209,7 +222,7 @@ public class AcesApi {
 	        		if(pile == 1) {
 		        			currentDiscard.addToPile(currentP1.removeFromPile());
 		        			session.setAttribute("currentP1", currentP1);
-		        			System.out.println("Remove: "+ currentP1.getPile());
+		        			System.out.println("Remove P1: "+ currentP1.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -220,7 +233,7 @@ public class AcesApi {
 	        		} else if(pile == 2) {
 		        			currentDiscard.addToPile(currentP2.removeFromPile());
 		        			session.setAttribute("currentP2", currentP2);
-		        			System.out.println("Remove: "+ currentP2.getPile());
+		        			System.out.println("Remove P2: "+ currentP2.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -231,7 +244,7 @@ public class AcesApi {
 	        		} else if(pile == 3) {
 		        			currentDiscard.addToPile(currentP3.removeFromPile());
 		        			session.setAttribute("currentP3", currentP3);
-		        			System.out.println("Remove: "+ currentP3.getPile());
+		        			System.out.println("Remove P3: "+ currentP3.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -242,7 +255,7 @@ public class AcesApi {
 	        		} else if(pile == 4) {
 	        			currentDiscard.addToPile(currentP4.removeFromPile());
 		        			session.setAttribute("currentP4", currentP4);
-		        			System.out.println("Remove: "+ currentP4.getPile());
+		        			System.out.println("Remove P4: "+ currentP4.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -272,7 +285,7 @@ public class AcesApi {
 	        		if(pile == 1) {
 		        			currentDiscard.addToPile(currentP1.removeFromPile());
 		        			session.setAttribute("currentP1", currentP1);
-		        			System.out.println("Remove: "+ currentP1.getPile());
+		        			System.out.println("Remove P1: "+ currentP1.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -283,7 +296,7 @@ public class AcesApi {
 	        		} else if(pile == 2) {
 		        			currentDiscard.addToPile(currentP2.removeFromPile());
 		        			session.setAttribute("currentP2", currentP2);
-		        			System.out.println("Remove: "+ currentP2.getPile());
+		        			System.out.println("Remove P2: "+ currentP2.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -294,7 +307,7 @@ public class AcesApi {
 	        		} else if(pile == 3) {
 		        			currentDiscard.addToPile(currentP3.removeFromPile());
 		        			session.setAttribute("currentP3", currentP3);
-		        			System.out.println("Remove: "+ currentP3.getPile());
+		        			System.out.println("Remove P3: "+ currentP3.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -305,7 +318,7 @@ public class AcesApi {
 	        		} else if(pile == 4) {
 	        			currentDiscard.addToPile(currentP4.removeFromPile());
 		        			session.setAttribute("currentP4", currentP4);
-		        			System.out.println("Remove: "+ currentP4.getPile());
+		        			System.out.println("Remove P4: "+ currentP4.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -335,7 +348,7 @@ public class AcesApi {
 	        		if(pile == 1) {
 		        			currentDiscard.addToPile(currentP1.removeFromPile());
 		        			session.setAttribute("currentP1", currentP1);
-		        			System.out.println("Remove: "+ currentP1.getPile());
+		        			System.out.println("Remove P1: "+ currentP1.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -346,7 +359,7 @@ public class AcesApi {
 	        		} else if(pile == 2) {
 		        			currentDiscard.addToPile(currentP2.removeFromPile());
 		        			session.setAttribute("currentP2", currentP2);
-		        			System.out.println("Remove: "+ currentP2.getPile());
+		        			System.out.println("Remove P2: "+ currentP2.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -357,7 +370,7 @@ public class AcesApi {
 	        		} else if(pile == 3) {
 		        			currentDiscard.addToPile(currentP3.removeFromPile());
 		        			session.setAttribute("currentP3", currentP3);
-		        			System.out.println("Remove: "+ currentP3.getPile());
+		        			System.out.println("Remove p3: "+ currentP3.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);
@@ -368,7 +381,7 @@ public class AcesApi {
 	        		} else if(pile == 4) {
 	        			currentDiscard.addToPile(currentP4.removeFromPile());
 		        			session.setAttribute("currentP4", currentP4);
-		        			System.out.println("Remove: "+ currentP4.getPile());
+		        			System.out.println("Remove p4: "+ currentP4.getPile());
 		        			//score +5
 		        			int scoreAdded = score + 5;
 		        			session.setAttribute("score", scoreAdded);

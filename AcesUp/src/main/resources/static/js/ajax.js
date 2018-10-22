@@ -108,14 +108,14 @@ $(document).ready(function(){
             var data = $.parseJSON(response);
             var count = 1;
             if(data == true){
-            	$(".container").remove();
+            	$(".pile_container").remove();
             	$(".deal").remove();
             	$(".result").append("<h3 id='win_title'>You win, idiot!</h3><BR>");
             	$(".result").append("<input type='image' type='button' img src='/images/dunce.jpg' width='200' id='win'><BR>");
             	$(".result").append("<input type='submit' value='Play Again?' id='reset' class='btn btn-primary'>");
             	$("#totalPiles").html(0);
             } else if(data == false){
-            	$(".container").remove();
+            	$(".pile_container").remove();
             	$(".deal").remove();
             	$(".result").append("<h3>Losing is hard, try again.</h3><BR>");
             	$(".result").append("<input type='image' type='button' img src='/images/lose.png' id='lose'><BR>");
@@ -172,7 +172,8 @@ $(document).ready(function(){
                 	$("#score").html(data[1]);
                 }
                 //delete card
-                $( "#" + data[0] ).remove();
+                console.log(data[0]);
+                $("#"+data[0]).remove();
                 //movement check
                 var count1 = $("#1 > .c").length;
             	var count2 = $("#2 > .c").length;

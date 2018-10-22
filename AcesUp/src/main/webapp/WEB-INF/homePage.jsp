@@ -54,14 +54,14 @@
 			<div class="deal"><input type="image" src="/images/card_blue_back.png" width="120" type="button" value="Deal" id="start" ></div>
 		</div>
 		<div id="center">
-			<div class="container">
-				<div>
+			<div class="pile_container">
+				<div class="pile_row">
 					<div class="offsetPile" id="drop1"></div>
 			    	<div class="offsetPile" id="drop2"></div>
 			    	<div class="offsetPile" id="drop3"></div>
 			    	<div class="offsetPile" id="drop4"></div>
 			    </div>
-			    <div>
+			    <div class="pile_row">
 				    <div class="pile" id="1"></div>
 				    <div class="pile" id="2"></div>
 				    <div class="pile" id="3"></div>

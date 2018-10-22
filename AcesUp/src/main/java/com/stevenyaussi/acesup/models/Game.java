@@ -1,50 +1,52 @@
 package com.stevenyaussi.acesup.models;
 
 import java.util.Date;
-import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import antlr.collections.List;
 
 @Entity
-@Table(name="user")
-public class User {
+@Table(name="game")
+public class Game {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    @Size(min=3, message="User Name must be greater than 3 characters")
-    private String userName;
-    @Email(message="Email must be valid")
-    @Size(min=5, message="Email must be greater than 5 characters")
-    private String email;
-    @Size(min=8, message="Password must be greater than 8 characters")
-    private String password;
-    @Transient
-    private String passwordConfirmation;
+    @Min(value=-52, message="Capacity must be greater than -52")
+    private Integer score;
+    private Boolean outcome;
     @Column(updatable=false)
     private Date createdAt;
     private Date updatedAt;
-    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
-    private List<Game> game;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    private User user;
 
-    public User() {
+
+    public Game() {
     }
-
     
+    
+
 	public Long getId() {
 		return id;
 	}
+
 
 
 	public void setId(Long id) {
@@ -52,44 +54,29 @@ public class User {
 	}
 
 
-	public String getUserName() {
-		return userName;
+
+	public Integer getScore() {
+		return score;
 	}
 
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setScore(Integer score) {
+		this.score = score;
 	}
 
 
-	public String getEmail() {
-		return email;
+
+	public Boolean getOutcome() {
+		return outcome;
 	}
 
 
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setOutcome(Boolean outcome) {
+		this.outcome = outcome;
 	}
 
-
-	public String getPassword() {
-		return password;
-	}
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-	public String getPasswordConfirmation() {
-		return passwordConfirmation;
-	}
-
-
-	public void setPasswordConfirmation(String passwordConfirmation) {
-		this.passwordConfirmation = passwordConfirmation;
-	}
 
 
 	public Date getCreatedAt() {
@@ -97,9 +84,11 @@ public class User {
 	}
 
 
+
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+
 
 
 	public Date getUpdatedAt() {
@@ -107,19 +96,23 @@ public class User {
 	}
 
 
+
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
 
-	public List<Game> getGame() {
-		return game;
+
+	public User getUser() {
+		return user;
 	}
 
 
-	public void setGame(List<Game> game) {
-		this.game = game;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
+
 
 
 	@PrePersist
