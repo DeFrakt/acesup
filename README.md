@@ -9,13 +9,13 @@ MySQL database for tracking game play statistics.
 
 1.) Deal cards by pushing blue card deck.
 
-2.) If there are two or more cards of the same suit, discard all but the highest-ranked card of that suit. 
-Aces rank high.
+2.) If there are two or more cards of the same suit, discard all but the highest-ranked card 
+of that suit. Aces rank high.
 
 3.) Repeat step 2 until there are no more pairs of cards with the same suit.
 
-4.) Whenever there are any empty spaces, you may choose the top card of another pile to move to the empty space. 
-After you do this, go to Step 2.
+4.) Whenever there are any empty spaces, you may choose the top card of another pile to move 
+to the empty space. After you do this, go to Step 2.
 
 5.) When there are no more cards to move or remove, deal out the next cards.
 
