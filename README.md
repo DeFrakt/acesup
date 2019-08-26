@@ -3,6 +3,8 @@ Solitare game. Built with a Java API backend, formated to run on multiple device
 Card deck built with OOP principles, formated with JSON style data for cross-platform and asynchronous playing.
 MySQL database for tracking game play statistics.
 
+<img src="/acesup/AcesUp/src/main/resources/static/images/13_spades.png">
+
 # Rules
 
 <pre>
